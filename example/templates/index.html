@@ -31,6 +31,8 @@
             // section of the page.
             socket.on('my_response', function(msg) {
                 $('#log').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+                //move log window to bottom after new text is entered
+                $("#log").scrollTop($("#log")[0].scrollHeight);
             });
 
 
@@ -41,6 +43,7 @@
 
             $('form#broadcast').submit(function(event) {
                  socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+                 // reset chat window to blank
                  document.getElementById("broadcast").reset();
                  return false;
              });
